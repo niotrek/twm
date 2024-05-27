@@ -1,0 +1,7 @@
+1. binarizacja i transformacja wyjscia z sieci
+2. crop wycianmy bounding box z 1.
+3. z 2. mamy do klasyfikacji pojednycze znaki
+4. input do sieci musimy binaryzowac jesli trzeba bedzie, robimy dla kazdego znaku po 5 zdj i potem je augmetnujemy? 36 znakow albo w tensorflow parametry image data generator, sheer wazny
+5. siec konwolucyjna z wyjsciem 36 neuronow
+6. 28x28. pierwsza wartswa resize i rescale (1./255)
+Notatki ze spotkania 

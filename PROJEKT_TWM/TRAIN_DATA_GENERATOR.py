@@ -1,5 +1,8 @@
 from PIL import ImageFont, ImageDraw, Image
 import math
+import random
+import os
+import cv2
 
 class TrainDataGenerator:
     def __init__(self) -> None:
@@ -56,18 +59,23 @@ class TrainDataGenerator:
         self.WIDTH_SCALE_COEF = width_coef
         self.HEIGHT_SCALE_COEF = height_coef
 
-    def create_plate(self, letter : str, template : Image.Image):
+    def create_plate(self, letter : str, template : Image.Image, rng=False):
         draw = ImageDraw.Draw(template)
         x, y = self.BG_size
-        x = x // 2
-        y = y // 2
-        draw.text((x, y), letter, font = self.PLATE_FONT, fill = 'black', anchor = 'mm')
+        x = x // 2 
+        y = y // 2 
+        font= self.PLATE_FONT
+        if rng:
+            x+=random.randint(-20, 20)
+            y+=random.randint(-15, 15)
+            #font=int(font*random.random())
+        draw.text((x, y), letter, font = font, fill = 'black', anchor = 'mm')
 
-    def show_image(self, show : bool = False, save : bool = False):
+    def show_image(self, show : bool = False, save : bool = False, name="test.jpg"):
         if show:
             self.PLATE_TEMPLATE.show()
         if save:
-            self.PLATE_TEMPLATE.save('test.jpg')
+            self.PLATE_TEMPLATE.save(name)
 
     def clear_template(self):
         self.PLATE_TEMPLATE = Image.new("RGB", self.BG_size, "white")
@@ -76,18 +84,28 @@ if __name__ == "__main__":
     generator = TrainDataGenerator()
 
     # Dorobić pętlę do przechodzenia po wszystkich znakach A-Z, 0-9
-    letter = 'T'
-
-    # Do create_plate() można dodać augmentację
-    # i ewentualnie dopisać losowanie nowej wielkości liter
-    # np. przez mnożenie self.PLATE_FONT przez jakiś współczynnik
-    # z przedziału [0, 1] (tylko nie nadpisywać self.PLATE_FONT)
-    generator.create_plate(letter, generator.PLATE_TEMPLATE)
-
-    # Zmienić drugi argument na True żeby zapisywać obrazy z literami
-    # a pierwszy na False żeby nie wyświetlać wszystkiego w trakcie
-    # generowaia zbioru danych
-    # Najlepiej żeby litery A były zapisywane w folderze o nazwie 'A' itd,
-    # litery B w folderze o nazwie 'B' itd.
-    generator.show_image(True, False)
-    generator.clear_template()
+    ascii_range= list(range(65,91))
+    ascii_range+= list(range(48,58))
+    print(ascii_range)
+    for letter_int in ascii_range:
+        letter = chr(letter_int)
+        if not os.path.exists("data_classificator"):
+            os.makedirs("data_classificator")
+        if not os.path.exists("data_classificator/"+letter):
+            os.makedirs("data_classificator/"+letter)
+        # Do create_plate() można dodać augmentację
+        # i ewentualnie dopisać losowanie nowej wielkości liter
+        # np. przez mnożenie self.PLATE_FONT przez jakiś współczynnik
+        # z przedziału [0, 1] (tylko nie nadpisywać self.PLATE_FONT)
+        for i in range(20):
+            if i==0:
+                generator.create_plate(letter, generator.PLATE_TEMPLATE,rng=False)
+            else:
+                generator.create_plate(letter, generator.PLATE_TEMPLATE,rng=True)
+            path="data_classificator/"+letter+f"/{i}.jpg"
+            generator.show_image(False, True,path)
+            img = cv2.imread(path)
+            gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+            _, binary_img = cv2.threshold(img, 128, 255, cv2.THRESH_BINARY)
+            cv2.imwrite(path, binary_img)
+            generator.clear_template()

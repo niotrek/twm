@@ -1,2 +1,6 @@
-PROJEKT_TWM/Data
-data_classificator
+PROJEKT_TWM/Data/coco/
+data_classificator/
+models/
+PROJEKT_TWM/Best_model/
+PROJEKT_TWM/Checkpoints/
+PROJEKT_TWM/Models/

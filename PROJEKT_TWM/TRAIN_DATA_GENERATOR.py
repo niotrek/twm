@@ -66,8 +66,8 @@ class TrainDataGenerator:
         y = y // 2 
         font= self.PLATE_FONT
         if rng:
-            x+=random.randint(-20, 20)
-            y+=random.randint(-15, 15)
+            x+=random.randint(-5, 5)
+            y+=random.randint(-5, 5)
             #font=int(font*random.random())
         draw.text((x, y), letter, font = font, fill = 'black', anchor = 'mm')
 

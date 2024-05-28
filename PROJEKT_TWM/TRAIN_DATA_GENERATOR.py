@@ -2,6 +2,7 @@ from PIL import ImageFont, ImageDraw, Image
 import math
 import random
 import os
+import cv2
 
 class TrainDataGenerator:
     def __init__(self) -> None:
@@ -84,7 +85,8 @@ if __name__ == "__main__":
 
     # Dorobić pętlę do przechodzenia po wszystkich znakach A-Z, 0-9
     ascii_range= list(range(65,91))
-    ascii_range+= list(range(48,57))
+    ascii_range+= list(range(48,58))
+    print(ascii_range)
     for letter_int in ascii_range:
         letter = chr(letter_int)
         if not os.path.exists("data_classificator"):
@@ -102,4 +104,8 @@ if __name__ == "__main__":
                 generator.create_plate(letter, generator.PLATE_TEMPLATE,rng=True)
             path="data_classificator/"+letter+f"/{i}.jpg"
             generator.show_image(False, True,path)
+            img = cv2.imread(path)
+            gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+            _, binary_img = cv2.threshold(img, 128, 255, cv2.THRESH_BINARY)
+            cv2.imwrite(path, binary_img)
             generator.clear_template()

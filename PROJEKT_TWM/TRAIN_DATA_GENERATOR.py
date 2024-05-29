@@ -18,7 +18,7 @@ class TrainDataGenerator:
         self.BG_size = (50, 50)
         self.load_plate_template('./LICENSE_PLATE_TEMPLATE.jpg')
         self.update_scale_coef()
-        self.load_plate_font('./arklatrs.ttf')
+        self.load_plate_font('PROJEKT_TWM/arklatrs.ttf')
     
     def load_plate_template(self, path : str = None) -> None:
         try: 

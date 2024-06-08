@@ -6,4 +6,4 @@ PROJEKT_TWM/Models/*
 better_data/car/*
 better_data/crop/*
 better_data/plate/*
-*/pycache
+*/__pycache__

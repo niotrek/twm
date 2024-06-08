@@ -22,6 +22,7 @@ class LetterClassifier:
         self.class_names = []
         self.data_augmentation = self.data_augmentation_layer()
         self.best_model_path = None
+        self.load_data()
 
     def load_data(self):
         self.train_ds = image_dataset_from_directory(
@@ -47,7 +48,7 @@ class LetterClassifier:
         )
         
         self.class_names = self.train_ds.class_names
-        print(self.class_names)
+        #print(self.class_names)
 
     def show_sample_images(self):
         plt.figure(figsize=(10, 10))

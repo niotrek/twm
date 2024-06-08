@@ -84,7 +84,8 @@ class Detector():
         return path
     
     def _load_image(self, img_path : Union[str, PathLike]) -> MatLike:
-        image = np.asarray(Image.open(img_path))
+        image = cv.imread(img_path)
+        image = cv.cvtColor(image, cv.COLOR_BGR2RGB)
         return image
 
     def _cast_to_int(self, num : float) -> int:

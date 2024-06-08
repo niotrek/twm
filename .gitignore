@@ -1,5 +1,4 @@
 PROJEKT_TWM/Data/*
-data_classificator/*
 models/*
 PROJEKT_TWM/Best_model/*
 PROJEKT_TWM/Checkpoints/*
@@ -7,3 +6,4 @@ PROJEKT_TWM/Models/*
 better_data/car/*
 better_data/crop/*
 better_data/plate/*
+*/pycache

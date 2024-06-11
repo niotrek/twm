@@ -36,8 +36,12 @@ RUN rm cuda-repo-wsl-ubuntu-12-4-local_12.4.1-1_amd64.deb
 ENV CUDNN_PATH="/home/user/.local/lib/python3.10/site-packages/nvidia/cudnn"
 ENV LD_LIBRARY_PATH="/home/user/.local/lib/python3.10/site-packages/nvidia/cudnn/lib:/usr/local/cuda/lib64"
 
-#COPY requirments.txt /home/user
+COPY requirements.txt /home/user
 
-#RUN pip install /home/user/requirments.txt
+RUN pip install -r requirements.txt
+
+RUN git clone http://github.com/niotrek/twm
+
+WORKDIR /home/user/twm
 
 CMD ["tail", "-f", "/dev/null"]

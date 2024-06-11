@@ -8,7 +8,7 @@ Section with "Installing with Apt"
 docker build -t sarna320/twm:latest .
 ```
 ```sh 
-docker pull  sarna320/twm:latest .
+docker pull  sarna320/twm:latest
 ```
 
 ### You can add a volume by adding for example ```-v ${PWD}/:/home/user/twm/```, to your path

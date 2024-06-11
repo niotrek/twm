@@ -7,3 +7,4 @@ better_data/car/*
 better_data/crop/*
 better_data/plate/*
 */__pycache__
+hard/*

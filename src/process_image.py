@@ -190,9 +190,9 @@ class ImageProcessor:
             plt.title("Odwrócona Maska Otsu")
             plt.imshow(otsu_mask_reversed, cmap="gray")
 
-            plt.subplot(1, 5, 5)
-            plt.imshow(clustered_image, cmap="jet")  # Użyj mapy kolorów 'jet'
-            plt.title("Wyniki Klastrów")
+            # plt.subplot(1, 5, 5)
+            # plt.imshow(clustered_image, cmap="jet")  # Użyj mapy kolorów 'jet'
+            # plt.title("Wyniki Klastrów")
 
             plt.show()
 

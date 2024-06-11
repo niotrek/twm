@@ -19,6 +19,7 @@ docker run --gpus all -d --name twm-container sarna320/twm:latest
 ```sh
 docker exec -it twm-container bash
 ```
+### Recommendation is to use visual studio code and option to attach to running container
 
 ## 3. Check nvidia driver
 ```sh
